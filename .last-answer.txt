@@ -1,13 +1,14 @@
-Вопрос: расскажи про проект Лови кратко
+Вопрос: Тебе знать нечему, кладу трубку.
+ Могу посмотреть, твой ребенок уже большой.
 
-Проект Лови — это приложение, которое собирает все местные кафе, пекарни, магазины и сервисы в одном месте для вашего района. Оно создает единую карту лояльности и агрегирует локальные сервисы вместо конкуренции с федеральными платформами. Цель — построить комплексную информационную платформу, агентство развития и систему реферальных продаж, масштабируемую через франшизу.
+В контексте документации Lovii ответа на этот вопрос нет. Вопрос не относится к проекту.
 
 Источники:
 /Users/best/Projects/lovii_docs/docs/PARAMS.md
 /Users/best/Projects/lovii_docs/docs/START_VECTOR.md
-/Users/best/Projects/lovii_docs/docs/lovii_summary.md
+/Users/best/Projects/lovii_docs/docs/PARAMS.md
+/Users/best/Projects/lovii_docs/docs/FINANCIAL_MODEL.md
 /Users/best/Projects/lovii_docs/docs/START_VECTOR.md
+/Users/best/Projects/lovii_docs/docs/FACT_MAP.md
 /Users/best/Projects/lovii_docs/docs/PARAMS.md
-/Users/best/Projects/lovii_docs/docs/PARAMS.md
-/Users/best/Projects/lovii_docs/docs/PARAMS.md
-/Users/best/Projects/lovii_docs/docs/lovii_summary.md
+/Users/best/Projects/lovii_docs/docs/START_VECTOR.md

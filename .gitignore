@@ -1,5 +1,6 @@
 node_modules/
 .kb-index.json
+.last-answer.txt
 *.log
 .DS_Store
 dist/
