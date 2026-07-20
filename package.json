@@ -6,8 +6,7 @@
   "description": "Бесплатный голосовой RAG-ассистент: Whisper (STT) + локальная база знаний + macOS say (TTS)",
   "scripts": {
     "ingest": "tsx scripts/ingest.ts",
-    "assist": "tsx src/assistant.ts",
-    "web": "tsx src/server.ts"
+    "assist": "tsx src/assistant.ts"
   },
   "dependencies": {
     "ollama": "^0.5.0"
