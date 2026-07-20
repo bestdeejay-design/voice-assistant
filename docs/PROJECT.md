@@ -17,7 +17,7 @@
 | STT (распознавание) | whisper.cpp `whisper-cli` + `ggml-small.bin` | локально, офлайн |
 | Embeddings | Ollama `nomic-embed-text` | локально, без ключа |
 | Векторный индекс | локальный in-process (косинусное сходство, файл) | zero-infra |
-| LLM (генерация) | Ollama `deepseek-r1` | локально, без ключа |
+| LLM (генерация) | облачные бесплатные модели Ollama-провайдера: `minimax-m3:cloud`, `nemotron-3-super:cloud` (fallback на локальные `deepseek-r1`, `yi-coder`) | бесплатно, с лимитом |
 | TTS (озвучка) | macOS `say` (голос Yuri) | встроен в macOS |
 | Рантайм | TypeScript + Node.js v25 | бесплатно |
 
@@ -39,6 +39,9 @@
 
 - STT через whisper.cpp (brew) вместо облачных API — офлайн, бесплатно.
 - TTS через встроенный macOS `say` — ноль установки и моделей, достаточно для демо.
+- Генерация через бесплатные облачные модели Ollama-провайдера
+  (`minimax-m3:cloud`, `nemotron-3-super:cloud`) — быстро, без платных ключей;
+  fallback на локальные модели при недоступности облака.
 - Локальный in-process индекс вместо серверной векторной БД — zero-infra.
 - RAG переиспользует тот же подход, что и в сервисе knowledge-base.
 

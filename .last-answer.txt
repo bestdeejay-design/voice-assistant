@@ -1,0 +1,13 @@
+Вопрос: расскажи про проект Лови кратко
+
+Проект Лови — это приложение, которое собирает все местные кафе, пекарни, магазины и сервисы в одном месте для вашего района. Оно создает единую карту лояльности и агрегирует локальные сервисы вместо конкуренции с федеральными платформами. Цель — построить комплексную информационную платформу, агентство развития и систему реферальных продаж, масштабируемую через франшизу.
+
+Источники:
+/Users/best/Projects/lovii_docs/docs/PARAMS.md
+/Users/best/Projects/lovii_docs/docs/START_VECTOR.md
+/Users/best/Projects/lovii_docs/docs/lovii_summary.md
+/Users/best/Projects/lovii_docs/docs/START_VECTOR.md
+/Users/best/Projects/lovii_docs/docs/PARAMS.md
+/Users/best/Projects/lovii_docs/docs/PARAMS.md
+/Users/best/Projects/lovii_docs/docs/PARAMS.md
+/Users/best/Projects/lovii_docs/docs/lovii_summary.md

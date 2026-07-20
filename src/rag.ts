@@ -1,8 +1,17 @@
 import { Ollama } from "ollama";
+import { writeFileSync } from "node:fs";
 import { querySimilar, getChunkByFile } from "./store.js";
 
 const ollama = new Ollama({ host: process.env.OLLAMA_HOST ?? "http://localhost:11434" });
-const GEN_MODEL = process.env.GEN_MODEL ?? "deepseek-r1";
+
+// Fallback-цепочка генерации (по списку из конфига opencode, провайдер ollama).
+// Сначала облачные бесплатные модели (быстрые), затем локальные.
+// Первая доступная отвечает; при ошибке — следующая.
+const MODELS_FALLBACK = (
+  process.env.GEN_MODEL
+    ? [process.env.GEN_MODEL]
+    : ["minimax-m3:cloud", "nemotron-3-super:cloud", "deepseek-r1", "yi-coder"]
+);
 
 export interface Answer {
   text: string;
@@ -43,12 +52,22 @@ export async function answer(question: string, topK = 8): Promise<Answer> {
     "Кратко, подходит для озвучивания. Цитируй номера фрагментов.\n\n" +
     `Контекст:\n${context}\n\nВопрос: ${question}\n\nОтвет:`;
 
-  let text: string;
-  try {
-    const r = await ollama.generate({ model: GEN_MODEL, prompt, stream: false });
-    text = r.response.trim();
-  } catch {
-    text = `Контекст по запросу «${question}»:\n\n${context.slice(0, 1200)}`;
+  let text = "";
+  for (const model of MODELS_FALLBACK) {
+    try {
+      const r = await ollama.generate({ model, prompt, stream: false });
+      text = r.response.trim();
+      if (text) break;
+    } catch {
+      /* пробуем следующую модель в цепочке */
+    }
   }
+  if (!text) text = `Контекст по запросу «${question}»:\n\n${context.slice(0, 1200)}`;
+
+  // Сохраняем последний ответ в файл (для просмотра/отладки, не только озвучка)
+  try {
+    writeFileSync(".last-answer.txt", `Вопрос: ${question}\n\n${text}\n\nИсточники:\n${citations.join("\n")}\n`);
+  } catch { /* ignore */ }
+
   return { text, citations: [...new Set(citations)] };
 }
