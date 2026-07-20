@@ -53,11 +53,12 @@ async function main() {
   let recProc: import("node:child_process").ChildProcess | null = null;
 
   const prompt = () => {
-    rl.setPrompt(recording ? "● ЗАПИСЬ — (r) стоп: " : "(r) запись   (q) выход: ");
+    rl.setPrompt(recording ? "● ЗАПИСЬ — (s) стоп и распознать: " : "(r) запись   (q) выход: ");
     rl.prompt();
   };
 
   console.log("🎙️  Голосовой ассистент. Управление микрофоном через консоль.");
+  console.log("   r — начать запись | s — остановить и получить ответ | q — выход");
   prompt();
 
   rl.on("line", async (line) => {
@@ -68,24 +69,32 @@ async function main() {
       process.exit(0);
     }
     if (cmd === "r") {
-      if (!recording) {
-        recording = true;
-        recProc = spawn("rec", ["-r", "16000", "-c", "1", "-t", "wav", AUDIO]);
-        console.log("● Идёт запись... говорите.");
+      if (recording) {
+        console.log("Уже пишем. Нажми (s), чтобы остановить.");
         prompt();
-      } else {
-        recording = false;
-        if (recProc) { recProc.kill("SIGINT"); recProc = null; }
-        console.log("■ Запись остановлена. Обработка...");
-        rl.pause();
-        try {
-          await handleQuestion();
-        } catch (e: any) {
-          console.error("Ошибка:", e?.message ?? e);
-        }
-        rl.resume();
-        prompt();
+        return;
       }
+      recording = true;
+      recProc = spawn("rec", ["-r", "16000", "-c", "1", "-t", "wav", AUDIO]);
+      console.log("● Идёт запись... говорите, затем (s).");
+      prompt();
+    } else if (cmd === "s") {
+      if (!recording) {
+        console.log("Запись не активна. Нажми (r), чтобы начать.");
+        prompt();
+        return;
+      }
+      recording = false;
+      if (recProc) { recProc.kill("SIGINT"); recProc = null; }
+      console.log("■ Запись остановлена. Обработка...");
+      rl.pause();
+      try {
+        await handleQuestion();
+      } catch (e: any) {
+        console.error("Ошибка:", e?.message ?? e);
+      }
+      rl.resume();
+      prompt();
     }
   });
 }
