@@ -1,0 +1,19 @@
+{
+  "name": "voice-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Бесплатный голосовой RAG-ассистент: Whisper (STT) + локальная база знаний + macOS say (TTS)",
+  "scripts": {
+    "ingest": "tsx scripts/ingest.ts",
+    "assist": "tsx src/assistant.ts"
+  },
+  "dependencies": {
+    "ollama": "^0.5.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
